@@ -44,7 +44,9 @@
 6. 等它自动滚动采集完毕（滚到底部且连续多轮无新增时会自动停止）
 7. 点「导出 JSON」
 
-![控制面板示意](https://img.shields.io/badge/位置-右下角-ff2442)
+<p align="center">
+  <img src="screenshot.png" width="360" alt="插件控制面板截图">
+</p>
 
 ## 导出格式
 
