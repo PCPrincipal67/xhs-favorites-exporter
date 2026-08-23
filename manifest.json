@@ -7,12 +7,14 @@
     "default_title": "XHS Favorites Exporter"
   },
   "host_permissions": [
-    "https://www.xiaohongshu.com/*"
+    "https://www.xiaohongshu.com/*",
+    "https://www.rednote.com/*"
   ],
   "content_scripts": [
     {
       "matches": [
-        "https://www.xiaohongshu.com/*"
+        "https://www.xiaohongshu.com/*",
+        "https://www.rednote.com/*"
       ],
       "js": [
         "content-script.js"
@@ -26,7 +28,8 @@
         "page-bridge.js"
       ],
       "matches": [
-        "https://www.xiaohongshu.com/*"
+        "https://www.xiaohongshu.com/*",
+        "https://www.rednote.com/*"
       ]
     }
   ]

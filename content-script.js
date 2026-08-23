@@ -215,7 +215,7 @@
   }
 
   function buildExploreUrl(noteId, token) {
-    var baseUrl = "https://www.xiaohongshu.com/explore/" + encodeURIComponent(String(noteId));
+    var baseUrl = "https://www.rednote.com/explore/" + encodeURIComponent(String(noteId));
     return token
       ? baseUrl + "?xsec_token=" + encodeURIComponent(String(token))
       : baseUrl;
