@@ -155,7 +155,7 @@
       interactInfo.liked_count
     ]);
 
-    var baseUrl = "https://www.xiaohongshu.com/explore/" + encodeURIComponent(String(noteId));
+    var baseUrl = "https://www.rednote.com/explore/" + encodeURIComponent(String(noteId));
     var url = xsecToken
       ? baseUrl + "?xsec_token=" + encodeURIComponent(String(xsecToken))
       : baseUrl;
