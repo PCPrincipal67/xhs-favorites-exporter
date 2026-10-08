@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "XHS Favorites Exporter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "导出小红书收藏列表里的 note_id、xsec_token 和 URL。",
   "action": {
     "default_title": "XHS Favorites Exporter"
@@ -15,6 +15,7 @@
         "https://www.xiaohongshu.com/*"
       ],
       "js": [
+        "exporter-core.js",
         "content-script.js"
       ],
       "run_at": "document_start"
@@ -23,6 +24,7 @@
   "web_accessible_resources": [
     {
       "resources": [
+        "exporter-core.js",
         "page-bridge.js"
       ],
       "matches": [

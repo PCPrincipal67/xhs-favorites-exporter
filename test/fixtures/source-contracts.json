@@ -1,0 +1,57 @@
+{
+  "provenance": {
+    "live_session_available": false,
+    "derived_from": [
+      "page-bridge.js and content-script.js at change start",
+      "harden-export-collection OpenSpec audit"
+    ],
+    "sanitized": true,
+    "unverified_disabled": [
+      "site-specific active-tab selectors beyond explicit data-xhs attributes",
+      "SSR collection keys beyond explicit collection metadata",
+      "fetch transport",
+      "live overlay and nested-scroll selectors"
+    ]
+  },
+  "routes": [
+    { "name": "homepage", "input": { "origin": "https://www.xiaohongshu.com", "pathname": "/", "search": "" }, "mode": "homepage" },
+    { "name": "following", "input": { "origin": "https://www.xiaohongshu.com", "pathname": "/following", "search": "" }, "mode": "following" },
+    { "name": "favorites", "input": { "origin": "https://www.xiaohongshu.com", "pathname": "/user/profile/profile-42", "search": "", "activeTab": { "key": "favorites", "label": "收藏" } }, "mode": "favorites", "profile_id": "profile-42" },
+    { "name": "posted-profile-tab", "input": { "origin": "https://www.xiaohongshu.com", "pathname": "/user/profile/profile-42", "search": "", "activeTab": { "key": "posted", "label": "笔记" } }, "supported": false },
+    { "name": "liked-profile-tab", "input": { "origin": "https://www.xiaohongshu.com", "pathname": "/user/profile/profile-42", "search": "", "activeTab": { "key": "liked", "label": "赞过" } }, "supported": false },
+    { "name": "detail-page", "input": { "origin": "https://www.xiaohongshu.com", "pathname": "/explore/note-1", "search": "" }, "supported": false }
+  ],
+  "ssr": {
+    "notes": [
+      { "tab_key": "posted", "items": [{ "id": "posted-1" }] },
+      { "tab_key": "favorites", "items": [{ "id": "fav-1", "xsec_token": "token-1" }] },
+      { "tab_key": "liked", "items": [{ "id": "liked-1" }] }
+    ],
+    "queries": [
+      { "tab_key": "posted", "cursor": "posted-cursor", "has_more": true },
+      { "tab_key": "favorites", "cursor": "fav-cursor", "has_more": false },
+      { "tab_key": "liked", "cursor": "liked-cursor", "has_more": true }
+    ],
+    "ambiguous_notes": [
+      { "items": [{ "id": "unknown-1" }] },
+      { "items": [{ "id": "unknown-2" }] }
+    ]
+  },
+  "requests": [
+    { "name": "favorites-collect", "meta": { "url": "/api/sns/web/v2/note/collect/page", "body": "{\"profile_id\":\"profile-42\"}" }, "context": "favorites", "belongs": true },
+    { "name": "wrong-profile-collect", "meta": { "url": "/api/sns/web/v2/note/collect/page", "body": "{\"profile_id\":\"profile-99\"}" }, "context": "favorites", "belongs": false },
+    { "name": "homefeed-related", "meta": { "url": "/api/sns/web/v1/homefeed", "body": "{\"category\":\"related-recommendation\"}" }, "context": "homepage", "belongs": false },
+    { "name": "following-feed", "meta": { "url": "/api/sns/web/v1/homefeed", "body": "{\"category\":\"following\"}" }, "context": "following", "belongs": true }
+  ],
+  "responses": {
+    "success": { "code": 0, "data": { "notes": [{ "id": "note-1" }], "has_more": false } },
+    "empty-unknown": { "code": 0, "data": { "notes": [] } },
+    "business-failure": { "code": 1001, "msg": "rate limited", "data": { "notes": [] } },
+    "malformed": { "code": 0, "data": { "notes": "not-an-array" } }
+  },
+  "nested_scroll": {
+    "active_list_selector": "[data-xhs-collection=\"favorites\"]",
+    "scroll_container": { "scrollTop": 720, "clientHeight": 400, "scrollHeight": 1200 },
+    "near_bottom_threshold": 120
+  }
+}
